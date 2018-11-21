@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7ab50db-a746-4ea6-bd81-8a752548a2af" name="Default Changelist" comment="" />
+    <list default="true" id="b7ab50db-a746-4ea6-bd81-8a752548a2af" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../change_template/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../change_template/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../change_template/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../change_template/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capston/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/capston/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capston/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/capston/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontpage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontpage/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontpage/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,59 +49,171 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1455709565">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="156" />
+          <entry key="py" value="240" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="156" />
+          <entry key="Python" value="240" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="3" />
+          <entry key="html" value="2" />
+          <entry key="py" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="3" />
+          <entry key="HTML" value="2" />
+          <entry key="Python" value="5" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage.py">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/capston/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-101">
+              <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontpage/models.py">
+        <entry file="file://$PROJECT_DIR$/frontpage/templates/frontpage/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="61" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+            <state relative-caret-position="323">
+              <caret line="47" column="36" lean-forward="true" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontpage/apps.py">
+        <entry file="file://$PROJECT_DIR$/frontpage/templates/frontpage/result.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontpage/static/css/landing-page.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="106" column="16" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontpage/static/css/landing-page.min.css">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/capston/settings.py">
+        <entry file="file://$PROJECT_DIR$/frontpage/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+            <state relative-caret-position="190">
+              <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontpage/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+                <marker date="1542802813284" expanded="true" signature="246:247" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontpage/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/capston/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+              <folding>
+                <element signature="e#631#672#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>daia</find>
       <find>temp</find>
+      <find>js</find>
+      <find>img</find>
+      <find>position</find>
+      <find>col-12 col-md-3</find>
+      <find>col</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/capston/settings.py" />
         <option value="$PROJECT_DIR$/frontpage/models.py" />
+        <option value="$PROJECT_DIR$/capston/settings.py" />
+        <option value="$PROJECT_DIR$/capston/urls.py" />
+        <option value="$PROJECT_DIR$/frontpage/urls.py" />
+        <option value="$PROJECT_DIR$/frontpage/forms.py" />
+        <option value="$PROJECT_DIR$/frontpage/templates/frontpage/result.html" />
+        <option value="$PROJECT_DIR$/frontpage/views.py" />
+        <option value="$PROJECT_DIR$/frontpage/templates/frontpage/index.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="176" />
-    <option name="y" value="60" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="20" />
+    <option name="y" value="53" />
     <option name="width" value="1401" />
     <option name="height" value="825" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -104,17 +224,43 @@
         <subPane>
           <expand>
             <path>
-              <item name="capston" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
               <item name="capston" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="capston" type="b2602c69:ProjectViewProjectNode" />
-              <item name="capston" type="462c0819:PsiDirectoryNode" />
-              <item name="capston" type="462c0819:PsiDirectoryNode" />
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+              <item name="frontpage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="capston" type="b2602c69:ProjectViewProjectNode" />
-              <item name="capston" type="462c0819:PsiDirectoryNode" />
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+              <item name="frontpage" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+              <item name="frontpage" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+              <item name="frontpage" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="output_with_Django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="output_with_Django" type="462c0819:PsiDirectoryNode" />
+              <item name="frontpage" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="frontpage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -124,7 +270,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../capston 파일 모음/origin_startbootstrap-landing-page-gh-pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../change_template" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -152,7 +298,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="176" y="60" width="1401" height="825" extended-state="1" />
+    <frame x="20" y="53" width="1401" height="825" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24944974" />
@@ -178,41 +324,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="67" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-735">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="50" column="49" lean-forward="true" selection-start-line="31" selection-end-line="50" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/capston/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontpage/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html" />
+    <entry file="file://$PROJECT_DIR$/base.html" />
+    <entry file="file://$PROJECT_DIR$/models.py" />
+    <entry file="file://$PROJECT_DIR$/frontpage/model.py" />
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -221,8 +336,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontpage/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="61" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
+        <state relative-caret-position="361">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/capston/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding>
+            <element signature="e#631#672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/capston/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-101">
+          <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/static/css/landing-page.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/static/css/landing-page.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="106" column="16" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+            <marker date="1542802813284" expanded="true" signature="246:247" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/templates/frontpage/result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontpage/templates/frontpage/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="47" column="36" lean-forward="true" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
         </state>
       </provider>
     </entry>
