@@ -1,9 +1,11 @@
-<!-- {% extends 'frontpage/index.html' %}
+{% extends 'frontpage/base.html' %}
+
 {% block content %}
+{% if test %}
+    <!--{{test.POST}}-->
+    <br>
+    <h10>'</h10>
+    {{test.POST.input_Symptom}} <h10>'의 검색결과는 다음과 같습니다.</h10>
+{% endif %}
 
-<div class="col-xl-9 mx-auto">
-<h1 class="mb-5"> hihhi2  </h1>
-<h1 class="mb-5"> hihhi2-1  </h1>
-</div>
-
-{% endblock %} -->
+{% endblock %}

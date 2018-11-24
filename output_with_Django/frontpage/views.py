@@ -4,13 +4,14 @@ from django.shortcuts import redirect
 
 # Create your views here.
 def index(request):
-    return render(request, 'frontpage/index.html')
-
-def result(request):
+    print("hihi")
     if request.method == "POST":
-        return redirect('index')
+        test=request
+        return render(request, 'frontpage/result.html',
+                      {'test': test})
     else:
-        return redirect('index')
+        return render(request, 'frontpage/index.html')
+
 
     '''    
     elif request.method == "POST":
