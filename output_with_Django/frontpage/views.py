@@ -7,8 +7,14 @@ def index(request):
     print("hihi")
     if request.method == "POST":
         test=request
+        # Html에서 test.POST.input_Symptom
+        # python 코드에서는 접근 방법이 약간 달랐음.
+        user_input=test.POST['input_Symptom']
+        result=Temp.objects.filter(origin=user_input)
+        #for i in result:
+            #print(i.synonym)
         return render(request, 'frontpage/result.html',
-                      {'test': test})
+                      {'test': test,'result':result})
     else:
         return render(request, 'frontpage/index.html')
 
