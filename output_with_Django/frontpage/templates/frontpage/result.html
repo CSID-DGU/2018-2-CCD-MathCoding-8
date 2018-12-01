@@ -1,56 +1,82 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<style>
-a { text-decoration: none; 
-text-align:left;
-   
- line-height:100px;
+    <style>
+        a.top {
+            color: white;
+            font-size: 70px;
+            position: fixed;
+            right : 50px;
+            bottom: 100px;
+            display: none;
+        }
+    </style>
+    <link href='{% static "css/style2.css" %}' rel="stylesheet" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-color: white;
-      text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-}
-    
- .font-size-40 { font-size: 40px; 
- font-family: cursive;}
- 
-</style>
-<link href='{% static "css/style2.css" %}' rel="stylesheet" >
-<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-<title>Mathcoding Search</title>
+    <title> Mathcoding Search </title>
 </head>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $( document ).ready( function() {
+        $( window ).scroll( function() {
+            if ( $( this ).scrollTop() > 200 ) {
+                $( '.top' ).fadeIn();
+            } else {
+                $( '.top' ).fadeOut();
+            }
+        } );
+        $( '.top' ).click( function() {
+            $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+            return false;
+        } );
+    } );
+</script>
 
 <body>
 <a class="font-size-40" href="/" >  &nbsp;&nbsp;Medical Search Engine</a>
-
 <form method="POST"
       action=""
       enctype="multipart/form-data">
 
-        <div class="search-box">
+    <div class="search-box">
         <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
-            {% csrf_token %}
+        {% csrf_token %}
         <button type="submit" class="search-btn">
-        <i class="fas fa-search" ></i>
+            <i class="fas fa-search" ></i>
         </button>
-        </div>
+    </div>
 </form>
 
 
 <br><br><br><br>
 <hr>
-{% if test %}
-    <!--{{test.POST}}-->
-    <br>
-    <h10>'</h10>
-    {{test.POST.input_Symptom}} <h10>'의 검색결과는 다음과 같습니다.</h10>
-<br>
-    {% for i in result %}
-        {{i.synonym}}
-        <br>
-    {% endfor %}
 
-{% endif %}
+
+<script type="text/javascript">
+
+    {#자바스크립트로 표현하기 #}
+
+    var di = {{ disease|safe }};
+    var count = {{ count|safe}};
+    for(var i=0;i<count;i++){
+        document.write(di[i]._source.diseaseko+"<br>");
+        document.write(di[i]._source.symptom+"<br><br>");
+    }
+
+
+
+</script>
+
+<a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
+
+
+
+</body>
+
+</html>
+

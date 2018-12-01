@@ -1,57 +1,81 @@
 body{
-margin: 0;
-padding: 0;
-background: #bdc3c7;
+    margin: 0;
+    padding: 0;
+    background: #bdc3c7;
 }
-.seach-head{
-float: top;
-padding: 0;
-color: white;
-font-size: 20px;
-transition: 0.4s;
-line-height:100px;
-width:0px;
-}
+/*.search-head{*/
+/*float: top;*/
+/*padding: 0;*/
+/*color: white;*/
+/*font-size: 20px;*/
+/*transition: 0.4s;*/
+/*line-height:100px;*/
+/*width:0px;*/
+/*}*/
+
 .search-box{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-background: #2f3640;
-height: 40px;
-border-radius: 40px;
-padding: 10px;
-}
-
-.search-box:hover>.search-txt{
-width: 350px;
-padding: 0 6px;
-}
-
-.search-box:hover>.search-btn{
-background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #2f3640;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
 }
 
 .search-btn{
-color: #e84118;
-float: right;
-width: 40px;
-height: 40px;
-border-radius: 50%;
-background: #2f3640;
-display: flex;
-justify-content: center;
-align-items: center;
-transition:0.4s;
+    color: #e84118;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:0.4s;
 }
+
+.search-box:hover>.search-txt{
+    width: 350px;
+    padding: 0 6px;
+}
+
+.search-box:hover>.search-btn{
+    background: white;
+}
+
+
 .search-txt{
-border: none;
-background: none;
-float: left;
-padding: 0;
-color: white;
-font-size: 16px;
-transition: 0.4s;
-line-height:40px;
-width:0px;
+    border: none;
+    background: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height:40px;
+    width:0px;
+}
+
+h3{text-align: right;
+    text-shadow: 0 0 3px #95a5a6, 0 0 10px darkblue;
+    color: #34495e;
+    font-size:22px;
+}
+p:nth-child(1) {
+    line-height:150px;
+
+    text-decoration: none;
+    text-align:center;
+
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+
+.font-size-40 {
+    font-size: 40px;
+    font-family: cursive;
 }

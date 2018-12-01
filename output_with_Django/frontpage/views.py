@@ -2,19 +2,36 @@ from frontpage.models import Temp
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 
+from elasticsearch import Elasticsearch
+es_client = Elasticsearch("localhost:9200")
+
 # Create your views here.
 def index(request):
-    print("hihi")
     if request.method == "POST":
-        test=request
+        test = request
         # Html에서 test.POST.input_Symptom
         # python 코드에서는 접근 방법이 약간 달랐음.
-        user_input=test.POST['input_Symptom']
-        result=Temp.objects.filter(origin=user_input)
-        #for i in result:
-            #print(i.synonym)
+        user_input = test.POST['input_Symptom']
+        print(user_input)
+        result = es_client.search(index='nonono',
+                                  doc_type='doc',
+                                  body={
+                                      "query": {
+                                          "multi_match": {
+                                              "query": user_input,
+                                              "analyzer" : "nori",
+                                              "fields": ["diseaseko^5", "treatment", "symptom^3"]
+                                          }
+                                      }
+                                  },
+                                  size = 100
+                                  )
+        count = result['hits']['total']
+        disease = result['hits']['hits']
+        print(count)
+        print(disease)
         return render(request, 'frontpage/result.html',
-                      {'test': test,'result':result})
+                      {'user_input': user_input, 'disease': disease, 'count': count})
     else:
         return render(request, 'frontpage/index.html')
 
