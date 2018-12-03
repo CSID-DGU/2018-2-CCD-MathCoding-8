@@ -18,6 +18,6 @@ from django.conf.urls import include, url
 from django.contrib.auth import views
 
 urlpatterns = [
-    #url('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     url(r'', include('frontpage.urls')),
 ]
