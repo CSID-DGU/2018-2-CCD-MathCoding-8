@@ -16,11 +16,11 @@
 
 
 <h3>Capstone&nbsp&nbsp&nbsp&nbsp<br>Mathcoding&nbsp&nbsp&nbsp&nbsp</h3>
-<a style="text-decoration: none;" class="con_link" onmouseover="this.style.textDecoration='none';" onmouseout="this.style.textDecoration='none';" href="/">
+<a style="text-decoration: none;" class="con_link" onmouseover="this.style.textDecoration='none';" onmouseout="this.style.textDecoration='none';" href="{% url 'index' %}">
     <p class="font-size-40">Medical Searching Engine</p></a>
 
 <form method="POST"
-      action=""
+      action="{% url 'result' %}"
       enctype="multipart/form-data">
 
     <div class="search-box">
