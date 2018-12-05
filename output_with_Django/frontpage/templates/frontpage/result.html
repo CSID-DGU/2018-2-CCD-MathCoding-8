@@ -3,11 +3,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+{#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
+
     <style>
+
         @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
         @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
         a.top {
-            color: white;
+            color: darkgray;
             font-size: 70px;
             position: fixed;
             right : 50px;
@@ -40,7 +45,6 @@
         }
     </style>
     <link href='{% static "css/style2.css" %}' rel="stylesheet" >
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <title> Mathcoding Search </title>
 </head>
@@ -68,15 +72,13 @@
 <form method="POST"
       action="{% url 'result' %}"
       enctype="multipart/form-data">
-    <center>
-    <div class="search-box">
-        <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
-        {% csrf_token %}
-        <button type="submit" class="search-btn">
-            <i class="fas fa-search" ></i>
-        </button>
-    </div>
-    </center>
+        <div class="search-box">
+            <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
+            {% csrf_token %}
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search" ></i>
+            </button>
+        </div>
 </form>
 
 <br><br><br><br>
@@ -108,26 +110,54 @@
 
 
 </script>
+<center>
+<div class="w3-container">
+    <div class="w3-center">
+        <div class="w3-bar">
+        <font size="5">
+            {% if posts.has_other_pages %}
+                <!-- Pagination -->
+                <ul class="pagination justify-content-center">
+                    {% if posts.has_previous %}
+                        <a class="w3-button" href="?page=1">&laquo;</a>&nbsp;&nbsp;
+                    {% else %}
+                        <span>&laquo;</span>
+                    {% endif %}
+                    {% for i in posts.paginator.page_range %}
+                        <a class="w3-button" href="?page={{ i }}">{{ i }}</a>&nbsp;&nbsp;
+                    {% endfor %}
+                    {% if posts.has_next %}
+                        <a class="w3-button" href="?page={{ max_index }}">&raquo;</a>&nbsp;&nbsp;
+                    {% else %}
+                        <span>&raquo;</span>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </font>
+        </div>
+    </div>
+</div>
+</center>
 
-{% if posts.has_other_pages %}
-    <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-        {% if posts.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-        {% endif %}
-        {% for i in posts.paginator.page_range %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-        {% endfor %}
-        {% if posts.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-    </ul>
-{% endif %}
-
+{##}
+{#{% if posts.has_other_pages %}#}
+{#    <!-- Pagination -->#}
+{#    <ul class="pagination justify-content-center">#}
+{#        {% if posts.has_previous %}#}
+{#            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>#}
+{#        {% else %}#}
+{#            <li class="disabled"><span>&laquo;</span></li>#}
+{#        {% endif %}#}
+{#        {% for i in posts.paginator.page_range %}#}
+{#            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>#}
+{#        {% endfor %}#}
+{#        {% if posts.has_next %}#}
+{#            <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>#}
+{#        {% else %}#}
+{#            <li class="disabled"><span>&raquo;</span></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#{% endif %}#}
 
 <a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
 
