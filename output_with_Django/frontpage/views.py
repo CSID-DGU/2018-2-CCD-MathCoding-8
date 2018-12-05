@@ -123,7 +123,10 @@ def result(request):
                 posts = paginator.page(paginator.num_pages)
 
             max_index = len(paginator.page_range)
-
+            # print(posts.object_list[6]['highlight']['symptom'])
+            # print(type(posts.object_list[6]['highlight']['symptom']))
+            # print(len(posts.object_list[6]['highlight']['symptom']))
+            # print(len([]))
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, })

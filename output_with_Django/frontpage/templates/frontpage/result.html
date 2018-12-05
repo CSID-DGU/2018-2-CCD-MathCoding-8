@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-{#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
+    {#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
 
     <style>
 
@@ -32,7 +32,7 @@
             margin-right: 30px;
         }
         body{
-            font-family: Nanum gothic;
+            font-family: "Nanum gothic";
         }
         div.ground{
             background: ghostwhite;
@@ -43,6 +43,9 @@
         .header{
             font-family: 'Jeju Myeongjo', serif;
         }
+
+        .w3-button:hover{color:#000!important;background-color:#ccc!important}
+        .w3-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
     </style>
     <link href='{% static "css/style2.css" %}' rel="stylesheet" >
 
@@ -72,13 +75,13 @@
 <form method="POST"
       action="{% url 'result' %}"
       enctype="multipart/form-data">
-        <div class="search-box">
-            <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
-            {% csrf_token %}
-            <button type="submit" class="search-btn">
-                <i class="fas fa-search" ></i>
-            </button>
-        </div>
+    <div class="search-box">
+        <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
+        {% csrf_token %}
+        <button type="submit" class="search-btn">
+            <i class="fas fa-search" ></i>
+        </button>
+    </div>
 </form>
 
 <br><br><br><br>
@@ -100,43 +103,45 @@
     for(i=0;i<10; i++) {
         document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
         try {
-            document.write("<p>" + di[i].highlight.symptom + "</p><br><br>");
+            document.write("<p>" + di[i].highlight.symptom + "</p><br>");
         }
         catch(exception){
-            document.write("<p>" + di[i]._source.symptom + "</p><br><br>");
+            document.write("<p>" + di[i]._source.symptom + "</p><br>");
         }
     }
     document.write("</div>")
 
-
 </script>
 <center>
-<div class="w3-container">
-    <div class="w3-center">
-        <div class="w3-bar">
-        <font size="5">
-            {% if posts.has_other_pages %}
-                <!-- Pagination -->
-                <ul class="pagination justify-content-center">
-                    {% if posts.has_previous %}
-                        <a class="w3-button" href="?page=1">&laquo;</a>&nbsp;&nbsp;
-                    {% else %}
-                        <span>&laquo;</span>
+    <div class="w3-container">
+        <div class="w3-center">
+            <div class="w3-bar">
+                <font size="4" style="font-family: 'Nanum gothic'">
+                    {% if posts.has_other_pages %}
+                        <b>
+                            <!-- Pagination -->
+                            {#                <ul class="pagination justify-content-center">#}
+                            {% if posts.has_previous %}
+                                <a class="w3-button" href="?page=1">&laquo;</a>&nbsp;&nbsp;
+                            {% else %}
+                                <span>&laquo;</span>
+                            {% endif %}
+                            {% for i in posts.paginator.page_range %}
+                                <a class="w3-button" href="?page={{ i }}">{{ i }}</a>&nbsp;&nbsp;
+                            {% endfor %}
+                            {% if posts.has_next %}
+                                <a class="w3-button" href="?page={{ max_index }}">&raquo;</a>&nbsp;&nbsp;
+                            {% else %}
+                                <span>&raquo;</span>
+                            {% endif %}
+                            {#                </ul>#}
+                        </b>
                     {% endif %}
-                    {% for i in posts.paginator.page_range %}
-                        <a class="w3-button" href="?page={{ i }}">{{ i }}</a>&nbsp;&nbsp;
-                    {% endfor %}
-                    {% if posts.has_next %}
-                        <a class="w3-button" href="?page={{ max_index }}">&raquo;</a>&nbsp;&nbsp;
-                    {% else %}
-                        <span>&raquo;</span>
-                    {% endif %}
-                </ul>
-            {% endif %}
-        </font>
+                </font>
+            </div>
         </div>
     </div>
-</div>
+    <br>
 </center>
 
 {##}
