@@ -6,6 +6,31 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 es_client = Elasticsearch("localhost:9200")
 
+def query(user_input):
+    result = es_client.search(index='nnn',
+                                  doc_type='disease',
+                                  body={
+                                      "query": {
+                                          "multi_match": {
+                                              "query": user_input,
+                                              "fields": ["diseaseko^5", "treatment", "symptom^3"],
+                                              "type": "best_fields",
+                                              "fuzziness": "auto",
+                                              "minimum_should_match": 1
+                                          }
+                                      },
+                                      "highlight": {
+                                          "fragment_size": 2000,
+                                          "number_of_fragments": 0,
+                                          "fields": [
+                                              {"disease": {}},
+                                              {"symptom": {}}
+                                          ]
+                                      }
+                                  },
+                                  size = 100)
+    return result
+
 # Create your views here.
 def index(request):
     request.session.modified = True
@@ -15,26 +40,14 @@ def index(request):
         # python 코드에서는 접근 방법이 약간 달랐음.
         user_input = test.POST['input_Symptom']
         print(user_input)
-        result = es_client.search(index='nonono',
-                                  doc_type='doc',
-                                  body={
-                                      "query": {
-                                          "multi_match": {
-                                              "query": user_input,
-                                              "analyzer" : "nori",
-                                              "fields": ["diseaseko^5", "treatment", "symptom^3"]
-                                          }
-                                      }
-                                  },
-                                  size = 100
-                                  )
-        print(type(result))
+        result = query(user_input)
         count = result['hits']['total']
         disease = result['hits']['hits']
         #print(count)
         #print(disease)
         #print(type(count))
         #print(type(disease))
+
         paginator = Paginator(disease, 10)
         page = request.GET.get('page')
 
@@ -66,19 +79,7 @@ def result(request):
         test = request
         user_input = test.POST['input_Symptom']
         print(user_input)
-        result = es_client.search(index='nonono',
-                                  doc_type='doc',
-                                  body={
-                                      "query": {
-                                          "multi_match": {
-                                              "query": user_input,
-                                              "analyzer": "nori",
-                                              "fields": ["diseaseko^5", "treatment", "symptom^3"]
-                                          }
-                                      }
-                                  },
-                                  size=100
-                                  )
+        result = query(user_input)
 
         count = result['hits']['total']
         disease = result['hits']['hits']
@@ -108,19 +109,7 @@ def result(request):
             check = False
         if check:
             user_input = request.session['user_input']
-            result = es_client.search(index='nonono',
-                                      doc_type='doc',
-                                      body={
-                                          "query": {
-                                              "multi_match": {
-                                                  "query": user_input,
-                                                  "analyzer": "nori",
-                                                  "fields": ["diseaseko^5", "treatment", "symptom^3"]
-                                              }
-                                          }
-                                      },
-                                      size=100
-                                      )
+            result = query(user_input)
             disease = result['hits']['hits']
             paginator = Paginator(disease, 10)
             page = request.GET.get('page')
@@ -134,7 +123,10 @@ def result(request):
                 posts = paginator.page(paginator.num_pages)
 
             max_index = len(paginator.page_range)
-
+            # print(posts.object_list[6]['highlight']['symptom'])
+            # print(type(posts.object_list[6]['highlight']['symptom']))
+            # print(len(posts.object_list[6]['highlight']['symptom']))
+            # print(len([]))
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, })

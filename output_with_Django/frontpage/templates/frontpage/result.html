@@ -3,8 +3,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-
     <style>
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
         a.top {
             color: white;
             font-size: 70px;
@@ -12,6 +13,30 @@
             right : 50px;
             bottom: 100px;
             display: none;
+        }
+        em {
+            background-color: yellow;
+        }
+        p{
+            margin-left: 30px;
+            margin-right: 30px;
+            line-height: 25px;
+        }
+        h3{
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+        body{
+            font-family: Nanum gothic;
+        }
+        div.ground{
+            background: ghostwhite;
+            border-radius: 10px;
+            padding:15px;
+            margin:20px;
+        }
+        .header{
+            font-family: 'Jeju Myeongjo', serif;
         }
     </style>
     <link href='{% static "css/style2.css" %}' rel="stylesheet" >
@@ -39,10 +64,11 @@
 
 <body>
 <a class="font-size-40" href="{% url 'index' %}" >  &nbsp;&nbsp;Medical Search Engine</a>
+
 <form method="POST"
       action="{% url 'result' %}"
       enctype="multipart/form-data">
-
+    <center>
     <div class="search-box">
         <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
         {% csrf_token %}
@@ -50,8 +76,8 @@
             <i class="fas fa-search" ></i>
         </button>
     </div>
+    </center>
 </form>
-
 
 <br><br><br><br>
 <hr>
@@ -62,32 +88,44 @@
 
     {#자바스크립트로 표현하기 #}
 
-    var di = {{ posts.object_list|safe }};
+    var di = {{ posts.object_list | safe }};
+    var count = {{ count | safe }};
+    var i;
 
-    for(var i=0;i<10;i++){
-        document.write(di[i]._source.diseaseko+"<br>");
-        document.write(di[i]._source.symptom+"<br><br>");
+    document.write('<p class="header">총 <b>' + count + "</b> 건이 검색되었습니다.</p>")
+    document.write('<div class="ground">')
+
+    for(i=0;i<10; i++) {
+        document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+        try {
+            document.write("<p>" + di[i].highlight.symptom + "</p><br><br>");
+        }
+        catch(exception){
+            document.write("<p>" + di[i]._source.symptom + "</p><br><br>");
+        }
     }
+    document.write("</div>")
+
 
 </script>
 
 {% if posts.has_other_pages %}
-<!-- Pagination -->
-  <ul class="pagination justify-content-center">
-    {% if posts.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
-    {% else %}
-        <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in posts.paginator.page_range %}
-        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-    {% endfor %}
-    {% if posts.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>
-    {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in posts.paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endfor %}
+        {% if posts.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
 {% endif %}
 
 
@@ -98,4 +136,3 @@
 </body>
 
 </html>
-

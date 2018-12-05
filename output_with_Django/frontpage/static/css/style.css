@@ -1,7 +1,5 @@
 body{
-    margin: 0;
-    padding: 0;
-    background: #bdc3c7;
+    background: #64AAFF;
 }
 /*.search-head{*/
 /*float: top;*/
@@ -13,7 +11,7 @@ body{
 /*width:0px;*/
 /*}*/
 
-.search-box{
+div.search-box{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -60,7 +58,7 @@ body{
 }
 
 h3{text-align: right;
-    text-shadow: 0 0 3px #95a5a6, 0 0 10px darkblue;
+    text-shadow: 0 0 3px #95a5a6, 0 0 10px #FFDEE9;
     color: #34495e;
     font-size:22px;
 }
@@ -71,11 +69,15 @@ p:nth-child(1) {
     text-align:center;
 
     color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    text-shadow: 1px 1px 2px black, 0 0 25px #FFDEE9, 0 0 5px darkblue;
 }
 
 
 .font-size-40 {
     font-size: 40px;
     font-family: cursive;
+}
+
+.em {
+    background-color: yellow;
 }
