@@ -7,48 +7,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     {#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
 
+
     <style>
 
         @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
         @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
-        a.top {
-            color: darkgray;
-            font-size: 70px;
-            position: fixed;
-            right : 50px;
-            bottom: 100px;
-            display: none;
-        }
-        em {
-            background-color: yellow;
-        }
-        p{
-            margin-left: 30px;
-            margin-right: 30px;
-            line-height: 25px;
-        }
-        h3{
-            margin-left: 30px;
-            margin-right: 30px;
-        }
-        body{
-            font-family: "Nanum gothic";
-        }
-        div.ground{
-            background: ghostwhite;
-            border-radius: 10px;
-            padding:15px;
-            margin:20px;
-        }
-        .header{
-            font-family: 'Jeju Myeongjo', serif;
-        }
 
-        .w3-button:hover{color:#000!important;background-color:#ccc!important}
-        .w3-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
     </style>
     <link href='{% static "css/style2.css" %}' rel="stylesheet" >
-
+    {#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />#}
     <title> Mathcoding Search </title>
 </head>
 
@@ -70,107 +37,98 @@
 </script>
 
 <body>
-<a class="font-size-40" href="{% url 'index' %}" >  &nbsp;&nbsp;Medical Search Engine</a>
-
+<center>
+    <a class="font-size-40" href="{% url 'index' %}" >Medical Search Engine</a>
+</center>
 <form method="POST"
       action="{% url 'result' %}"
       enctype="multipart/form-data">
     <div class="search-box">
-        <input class="search-txt" type="text" name="input_Symptom" placeholder="Type to Symptom">
+        <input class="search-txt" type="text" name="input_Symptom" placeholder="증상을 입력해주세요">
         {% csrf_token %}
         <button type="submit" class="search-btn">
             <i class="fas fa-search" ></i>
         </button>
-
-
     </div>
+
     <br><br><br>
     결과내 재검색 <input type="checkbox" name="re-search">
-
 </form>
 
 <br><br><br><br>
 <hr>
 
-
+<br>
+<font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 이 </font>
 
 <script type="text/javascript">
 
     {#자바스크립트로 표현하기 #}
 
     var di = {{ posts.object_list | safe }};
-    var count = {{ count | safe }};
+    {#var user_input = {{ user_input}};#}
+    var count = {{ count|safe }};
     var i;
 
-    document.write('<p class="header">총 <b>' + count + "</b> 건이 검색되었습니다.</p>")
-    document.write('<div class="ground">')
+    {#document.write(user_input)#}
+    {#document.write('<p class="header"><font size="4">' + user_input + '으로 <br>')#}
+    {#document.write('총 <b>' + count + "</b> 건이 검색되었습니다.</font></p>")#}
 
-    for(i=0;i<10; i++) {
-        document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
-        try {
-            document.write("<p>" + di[i].highlight.symptom + "</p><br>");
+    if(count!=0){
+        document.write('<font size="4">총 <b>' + count + "</b> 건이 검색되었습니다.</font><br><br>")
+        document.write('<div class="ground">')
+
+        for(i=0;i<10; i++) {
+            document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+            try {
+                document.write("<p>" + di[i].highlight.symptom + "</p><br>");
+            }
+            catch(exception){
+                document.write("<p>" + di[i]._source.symptom + "</p><br>");
+            }
         }
-        catch(exception){
-            document.write("<p>" + di[i]._source.symptom + "</p><br>");
-        }
+        document.write("</div>")
+    }else{
+        // ~~로 검색되는 결과가 없습니다.
+        document.write('<center><div class="ground"><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
+        document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></div></center>')
     }
-    document.write("</div>")
 
 </script>
-<center>
-    <div class="w3-container">
-        <div class="w3-center">
-            <div class="w3-bar">
-                <font size="4" style="font-family: 'Nanum gothic'">
-                    {% if posts.has_other_pages %}
-                        <b>
-                            <!-- Pagination -->
-                            {#                <ul class="pagination justify-content-center">#}
-                            {% if posts.has_previous %}
-                                <a class="w3-button" href="?page=1">&laquo;</a>&nbsp;&nbsp;
-                            {% else %}
-                                <span>&laquo;</span>
-                            {% endif %}
-                            {% for i in posts.paginator.page_range %}
-                                <a class="w3-button" href="?page={{ i }}">{{ i }}</a>&nbsp;&nbsp;
-                            {% endfor %}
-                            {% if posts.has_next %}
-                                <a class="w3-button" href="?page={{ max_index }}">&raquo;</a>&nbsp;&nbsp;
-                            {% else %}
-                                <span>&raquo;</span>
-                            {% endif %}
-                            {#                </ul>#}
-                        </b>
+<div class="ground1">
+    <nav>
+        <ul class="pagination">
+            {% if posts.has_other_pages %}
+                    <!-- Pagination -->
+                    {#                <ul class="pagination justify-content-center">#}
+                    {% if posts.has_previous %}
+                        <li class="prev">
+                            <a  href="?page=1" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span></a>
+                        </li>
+                    {% else %}
+                        <li class="prev">
+                            <span aria-hidden="true">&laquo;</span></li>
                     {% endif %}
-                </font>
-            </div>
-        </div>
-    </div>
+                    {% for i in posts.paginator.page_range %}
+                        <li><a href="?page={{ i }}" >{{ i }}</a></li>&nbsp;&nbsp;
+                    {% endfor %}
+                    {% if posts.has_next %}
+                        <li class="next">
+                            <a href="?page={{ max_index }}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                            </a></li>
+                    {% else %}
+                        <li class="next">
+                            <span aria-hidden="true">&raquo;</span></li>
+                    {% endif %}
+                    {#                </ul>#}
+            {% endif %}
+        </ul>
+    </nav>
     <br>
-</center>
-
-{##}
-{#{% if posts.has_other_pages %}#}
-{#    <!-- Pagination -->#}
-{#    <ul class="pagination justify-content-center">#}
-{#        {% if posts.has_previous %}#}
-{#            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>#}
-{#        {% else %}#}
-{#            <li class="disabled"><span>&laquo;</span></li>#}
-{#        {% endif %}#}
-{#        {% for i in posts.paginator.page_range %}#}
-{#            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>#}
-{#        {% endfor %}#}
-{#        {% if posts.has_next %}#}
-{#            <li class="page-item"><a class="page-link" href="?page={{ max_index }}">&raquo;</a></li>#}
-{#        {% else %}#}
-{#            <li class="disabled"><span>&raquo;</span></li>#}
-{#        {% endif %}#}
-{#    </ul>#}
-{#{% endif %}#}
+</div>
 
 <a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
-
 
 
 </body>
