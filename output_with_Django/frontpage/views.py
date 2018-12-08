@@ -6,30 +6,72 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 es_client = Elasticsearch("localhost:9200")
 
+# 일반 쿼리문
 def query(user_input):
     result = es_client.search(index='nnn',
-                                  doc_type='disease',
-                                  body={
-                                      "query": {
-                                          "multi_match": {
-                                              "query": user_input,
-                                              "fields": ["diseaseko^5", "treatment", "symptom^3"],
-                                              "type": "best_fields",
-                                              "fuzziness": "auto",
-                                              "minimum_should_match": 2
-                                          }
-                                      },
-                                      "highlight": {
-                                          "fragment_size": 2000,
-                                          "number_of_fragments": 0,
-                                          "fields": [
-                                              {"diseaseko": {}},
-                                              {"symptom": {}}
-                                          ]
+                              doc_type='disease',
+                              body={
+                                  "query": {
+                                      "multi_match": {
+                                          "query": user_input,
+                                          "fields": ["diseaseko^3", "treatment", "symptom^2"],
+                                          "type": "best_fields",
+                                          "fuzziness": "auto",
+                                          "minimum_should_match": 2
                                       }
                                   },
-                                  size = 100)
+                                  "highlight": {
+                                      "fragment_size": 2000,
+                                      "number_of_fragments": 0,
+                                      "fields": [
+                                          {"diseaseko": {}},
+                                          {"symptom": {}}
+                                      ]
+                                  }
+                              },
+                              size = 100)
     return result
+
+# 검색결과 내 재검색 쿼리
+def re_query(old,new):
+    new_result = es_client.search(index='nnn',
+                              doc_type='disease',
+                              body={
+                                  "query": {
+                                      "bool": {
+                                          "must": {
+                                              "multi_match": {
+                                                  "query": old,
+                                                  "fields": ["diseaseko^3", "treatment", "symptom^2"],
+                                                  "type": "best_fields",
+                                                  "fuzziness": "auto",
+                                                  "minimum_should_match": 2
+                                              }
+                                          },
+                                          "filter": {
+                                              "multi_match": {
+                                                  "query": new,
+                                                  "fields": ["diseaseko^3", "treatment", "symptom^2"],
+                                                  "type": "best_fields",
+                                                  "fuzziness": "auto",
+                                                  "minimum_should_match": 2
+                                              }
+                                          }
+                                      }
+                                  }
+                                  ,
+                                  "highlight": {
+                                      "fragment_size": 2000,
+                                      "number_of_fragments": 0,
+                                      "fields": [
+                                          {"diseaseko": {}},
+                                          {"symptom": {}}
+                                      ]
+                                  }
+                              },
+                              size=100)
+    return new_result
+
 
 def pagenation_post(request,result):
     count = result['hits']['total']
@@ -84,7 +126,7 @@ def result(request):
         count, posts, max_index = pagenation_post(request,result)
 
         # print(posts.object_list[0]['highlight']['symptom'])
-        print(posts.object_list[0]['highlight'])
+        # print(posts.object_list[0]['highlight'])
 
         request.session['user_input'] = user_input
         request.session['count'] = count
