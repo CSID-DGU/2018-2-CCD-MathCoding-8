@@ -70,28 +70,30 @@
     var count = {{ count|safe }};
     var i;
 
-    {#document.write(user_input)#}
-    {#document.write('<p class="header"><font size="4">' + user_input + '으로 <br>')#}
-    {#document.write('총 <b>' + count + "</b> 건이 검색되었습니다.</font></p>")#}
 
     if(count!=0){
         document.write('<font size="4">총 <b>' + count + "</b> 건이 검색되었습니다.</font><br><br>")
         document.write('<div class="ground">')
 
         for(i=0;i<10; i++) {
-            document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
-            try {
+            if(di[i].highlight.diseaseko){
+                document.write("<h3>" + di[i].highlight.diseaseko + "</h3>");
+            }
+            else{
+                document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+            }
+            if(di[i].highlight.symptom){
                 document.write("<p>" + di[i].highlight.symptom + "</p><br>");
             }
-            catch(exception){
+            else{
                 document.write("<p>" + di[i]._source.symptom + "</p><br>");
             }
         }
         document.write("</div>")
     }else{
         // ~~로 검색되는 결과가 없습니다.
-        document.write('<center><div class="ground"><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
-        document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></div></center>')
+        document.write('<br><br><div class="ground"><center><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
+        document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></center></div>')
     }
 
 </script>
@@ -99,29 +101,29 @@
     <nav>
         <ul class="pagination">
             {% if posts.has_other_pages %}
-                    <!-- Pagination -->
-                    {#                <ul class="pagination justify-content-center">#}
-                    {% if posts.has_previous %}
-                        <li class="prev">
-                            <a  href="?page=1" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span></a>
-                        </li>
-                    {% else %}
-                        <li class="prev">
-                            <span aria-hidden="true">&laquo;</span></li>
-                    {% endif %}
-                    {% for i in posts.paginator.page_range %}
-                        <li><a href="?page={{ i }}" >{{ i }}</a></li>&nbsp;&nbsp;
-                    {% endfor %}
-                    {% if posts.has_next %}
-                        <li class="next">
-                            <a href="?page={{ max_index }}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
-                            </a></li>
-                    {% else %}
-                        <li class="next">
-                            <span aria-hidden="true">&raquo;</span></li>
-                    {% endif %}
-                    {#                </ul>#}
+                <!-- Pagination -->
+                {#                <ul class="pagination justify-content-center">#}
+                {% if posts.has_previous %}
+                    <li class="prev">
+                        <a  href="?page=1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                {% else %}
+                    <li class="prev">
+                        <span aria-hidden="true">&laquo;</span></li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                    <li><a href="?page={{ i }}" >{{ i }}</a></li>&nbsp;&nbsp;
+                {% endfor %}
+                {% if posts.has_next %}
+                    <li class="next">
+                        <a href="?page={{ max_index }}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                        </a></li>
+                {% else %}
+                    <li class="next">
+                        <span aria-hidden="true">&raquo;</span></li>
+                {% endif %}
+                {#                </ul>#}
             {% endif %}
         </ul>
     </nav>

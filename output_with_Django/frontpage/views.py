@@ -16,14 +16,14 @@ def query(user_input):
                                               "fields": ["diseaseko^5", "treatment", "symptom^3"],
                                               "type": "best_fields",
                                               "fuzziness": "auto",
-                                              "minimum_should_match": 1
+                                              "minimum_should_match": 2
                                           }
                                       },
                                       "highlight": {
                                           "fragment_size": 2000,
                                           "number_of_fragments": 0,
                                           "fields": [
-                                              {"disease": {}},
+                                              {"diseaseko": {}},
                                               {"symptom": {}}
                                           ]
                                       }
@@ -83,6 +83,9 @@ def result(request):
         result = query(user_input)
         count, posts, max_index = pagenation_post(request,result)
 
+        # print(posts.object_list[0]['highlight']['symptom'])
+        print(posts.object_list[0]['highlight'])
+
         request.session['user_input'] = user_input
         request.session['count'] = count
         return render(request, 'frontpage/result.html',
@@ -100,6 +103,9 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
+
+            print(posts.object_list)
+
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, })
