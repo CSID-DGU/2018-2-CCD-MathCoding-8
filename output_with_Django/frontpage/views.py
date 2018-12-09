@@ -135,7 +135,7 @@ def result(request):
         if checkbox_content:
             request.session['old_input']=request.session['user_input']
             user_input = request.POST['input_Symptom']
-            result = query(request.session['old_input'],user_input)
+            result = re_query(request.session['old_input'],user_input)
             count, posts, max_index, current_page = pagenation_post(request, result)
             request.session['user_input'] = user_input
             request.session['count'] = count
