@@ -49,12 +49,12 @@ def re_query(old,new):
                                               }
                                           },
                                           "filter": {
-                                              "multi_match": {
-                                                  "query": new,
-                                                  "fields": ["diseaseko^3", "treatment", "symptom^2"],
-                                                  "type": "best_fields",
-                                                  "fuzziness": "auto",
-                                                  "minimum_should_match": 2
+                                              "match": {
+                                                  "symptom": {
+                                                      "query": new,
+                                                      "fuzziness": "auto",
+                                                      "minimum_should_match": 2
+                                                  }
                                               }
                                           }
                                       }
@@ -103,6 +103,8 @@ def index(request):
         result = query(user_input)
         count,posts,max_index=pagenation_post(result)
 
+        print(re_query('두통 복통','설사'))
+
         request.session['user_input'] = user_input
         request.session['count'] = count
 
@@ -127,6 +129,7 @@ def result(request):
 
         # print(posts.object_list[0]['highlight']['symptom'])
         # print(posts.object_list[0]['highlight'])
+        # print(re_query('두통 복통', '설사'))
 
         request.session['user_input'] = user_input
         request.session['count'] = count
