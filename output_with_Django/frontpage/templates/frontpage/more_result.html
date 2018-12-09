@@ -1,0 +1,145 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    {#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
+
+
+    <style>
+
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+    </style>
+    <link href='{% static "css/style2.css" %}' rel="stylesheet" >
+    {#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />#}
+    <title> Mathcoding Search </title>
+</head>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $( document ).ready( function() {
+        $( window ).scroll( function() {
+            if ( $( this ).scrollTop() > 200 ) {
+                $( '.top' ).fadeIn();
+            } else {
+                $( '.top' ).fadeOut();
+            }
+        } );
+        $( '.top' ).click( function() {
+            $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+            return false;
+        } );
+    } );
+</script>
+
+<body>
+<center>
+    <a class="font-size-40" href="{% url 'index' %}" >Medical Search Engine</a>
+</center>
+<form method="POST"
+      action="{% url 'result' %}"
+      enctype="multipart/form-data">
+    <div class="search-box">
+        <input class="search-txt" type="text" name="input_Symptom" placeholder="증상을 입력해주세요">
+        {% csrf_token %}
+        <button type="submit" class="search-btn">
+            <i class="fas fa-search" ></i>
+        </button>
+    </div>
+
+    <br><br><br>
+</form>
+
+<br><br><br><br>
+<hr>
+
+<br>
+{% if count %}
+    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 </font>
+{% else %}
+    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 없습니다.</font>
+{% endif %}
+
+
+<script type="text/javascript">
+
+    {#자바스크립트로 표현하기 #}
+
+    var di = {{ posts.object_list | safe }};
+    {#var user_input = {{ user_input}};#}
+    var count = {{ count|safe }};
+    var i;
+    var current_page={{ current_page }};
+
+
+    if(count!=0){
+        document.write('<font size="4">총 <b>' + count + "</b> 건이 검색되었습니다.</font><br><br>")
+        document.write('<div class="ground">')
+
+        for(i=0;i<10; i++) {
+            if(di[i].highlight){
+                if(di[i].highlight.diseaseko){
+                    document.write("<h3>" + di[i].highlight.diseaseko + "</h3>");
+                }
+                else{
+                    document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+                }
+                if(di[i].highlight.symptom){
+                    document.write("<p>" + di[i].highlight.symptom + "</p><br>");
+                }
+                else{
+                    document.write("<p>" + di[i]._source.symptom + "</p><br>");
+                }
+            }else{
+                document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+                document.write("<p>" + di[i]._source.symptom + "</p><br>");
+            }
+        }
+        document.write('<center><font size="4"><b>'+current_page+"</b></font></center></div>")
+    }else{
+        // ~~로 검색되는 결과가 없습니다.
+        document.write('<br><br><div class="ground"><center><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
+        document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></center></div>')
+    }
+
+</script>
+<div class="ground1">
+    <nav>
+        <ul class="pagination">
+            {% if posts.has_other_pages %}
+                <!-- Pagination -->
+                {% if posts.has_previous %}
+                    <li class="prev">
+                        <a  href="?page=1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                {% else %}
+                    <li class="prev">
+                        <span aria-hidden="true">&laquo;</span></li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                    <li><a href="?page={{ i }}" >{{ i }}</a></li>&nbsp;&nbsp;
+                {% endfor %}
+                {% if posts.has_next %}
+                    <li class="next">
+                        <a href="?page={{ max_index }}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                        </a></li>
+                {% else %}
+                    <li class="next">
+                        <span aria-hidden="true">&raquo;</span></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
+    <br>
+</div>
+<a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
+
+
+</body>
+
+</html>
