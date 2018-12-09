@@ -106,8 +106,6 @@ def index(request):
         result = query(user_input)
         count,posts,max_index,current_page=pagenation_post(result)
 
-        print(re_query('두통 복통','설사'))
-
         request.session['user_input'] = user_input
         request.session['count'] = count
 
@@ -134,6 +132,8 @@ def result(request):
         # print(posts.object_list[0]['highlight']['symptom'])
         # print(posts.object_list[0]['highlight'])
         # print(re_query('두통 복통', '설사'))
+        print(posts.object_list[0]['_source']['diseaseko'])
+        print(posts.object_list[0])
 
         request.session['user_input'] = user_input
         request.session['count'] = count
@@ -153,8 +153,6 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
-
-            print(posts.object_list)
 
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,

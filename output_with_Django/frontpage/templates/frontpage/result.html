@@ -59,7 +59,12 @@
 <hr>
 
 <br>
-<font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 이 </font>
+{% if count %}
+    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 </font>
+{% else %}
+    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 없습니다.</font>
+{% endif %}
+
 
 <script type="text/javascript">
 
@@ -69,6 +74,7 @@
     {#var user_input = {{ user_input}};#}
     var count = {{ count|safe }};
     var i;
+    var current_page={{ current_page }};
 
 
     if(count!=0){
@@ -76,28 +82,30 @@
         document.write('<div class="ground">')
 
         for(i=0;i<10; i++) {
-            if(di[i].highlight.diseaseko){
-                document.write("<h3>" + di[i].highlight.diseaseko + "</h3>");
-            }
-            else{
+            if(di[i].highlight){
+                if(di[i].highlight.diseaseko){
+                    document.write("<h3>" + di[i].highlight.diseaseko + "</h3>");
+                }
+                else{
+                    document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+                }
+                if(di[i].highlight.symptom){
+                    document.write("<p>" + di[i].highlight.symptom + "</p><br>");
+                }
+                else{
+                    document.write("<p>" + di[i]._source.symptom + "</p><br>");
+                }
+            }else{
                 document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
-            }
-            if(di[i].highlight.symptom){
-                document.write("<p>" + di[i].highlight.symptom + "</p><br>");
-            }
-            else{
                 document.write("<p>" + di[i]._source.symptom + "</p><br>");
             }
         }
-        document.write("</div>")
+        document.write('<center><font size="4"><b>'+current_page+"</b></font></center></div>")
     }else{
         // ~~로 검색되는 결과가 없습니다.
         document.write('<br><br><div class="ground"><center><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
         document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></center></div>')
     }
-
-var current_page={{ current_page }};
-document.write('<br> <font size="4" style="margin-left: 11%">현재 <b>'+ current_page + 'page </b>입니다.</font>')
 
 </script>
 <div class="ground1">
@@ -105,7 +113,6 @@ document.write('<br> <font size="4" style="margin-left: 11%">현재 <b>'+ curren
         <ul class="pagination">
             {% if posts.has_other_pages %}
                 <!-- Pagination -->
-                {#                <ul class="pagination justify-content-center">#}
                 {% if posts.has_previous %}
                     <li class="prev">
                         <a  href="?page=1" aria-label="Previous">
@@ -126,13 +133,11 @@ document.write('<br> <font size="4" style="margin-left: 11%">현재 <b>'+ curren
                     <li class="next">
                         <span aria-hidden="true">&raquo;</span></li>
                 {% endif %}
-                {#                </ul>#}
             {% endif %}
         </ul>
     </nav>
     <br>
 </div>
-
 <a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
 
 
