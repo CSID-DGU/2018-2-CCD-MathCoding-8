@@ -124,13 +124,19 @@ def index(request):
 
 def result(request):
     request.session.modified = True
+    try:
+        re_search_check = request.session['re_search']
+        old_input = request.session['old_input']
+    except:
+        re_search_check = False
+        old_input = False
     # 결과 화면에서 POST방식 일 경우.
-    ## 결과 내 재검색 체크박스가 False인 경우.
     if request.method == "POST":
         try:
             checkbox_content=request.POST['re-search']
         except:
             checkbox_content=False
+
         # 결과내 재검색을 체크한 경우
         if checkbox_content:
             request.session['old_input']=request.session['user_input']
@@ -140,9 +146,9 @@ def result(request):
             count, posts, max_index, current_page = pagenation_post(request, result)
             request.session['user_input'] = user_input
             request.session['count'] = count
-            return render(request, 'frontpage/more_result.html',
+            return render(request, 'frontpage/result.html',
                           {'user_input': user_input, 'posts': posts, 'count': count,
-                           'max_index': max_index, 'current_page': current_page})
+                           'max_index': max_index, 'current_page': current_page,'re_search_check':re_search_check})
         # 결과내 재검색을 체크하지 않은 경우
         else:
             user_input = request.POST['input_Symptom']
@@ -157,9 +163,15 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
+            # 추가검색을 위해 만들어둔 세션 삭제해야 함.
+            try:
+                del request.session['old_input']
+                del request.session['re_search']
+            except:
+                print("not re_query")
             return render(request, 'frontpage/result.html',
                           {'user_input': user_input, 'posts': posts, 'count': count,
-                           'max_index': max_index, 'current_page':current_page})
+                           'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
     # 결과 화면에서 GET방식일 경우.
     else:
         # 예외 처리는 Pagination이 POST방식을 활용하는 것이 아니고 GET 방식을 활용하기 때문에 나눠짐.
@@ -169,8 +181,20 @@ def result(request):
         except:
             search_check = False
 
+        if re_search_check:
+            user_input = request.session['user_input']
+            result = re_query(old_input,user_input)
+            count, posts, max_index,current_page = pagenation_post(request,result)
+
+            request.session['user_input'] = user_input
+            request.session['count'] = count
+
+            return render(request, 'frontpage/result.html',
+                          {'user_input': request.session['user_input'], 'posts': posts,
+                           'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
+
         # Pagination 이용할 때
-        if search_check:
+        elif search_check:
             user_input = request.session['user_input']
             result = query(user_input)
             count, posts, max_index,current_page = pagenation_post(request,result)
@@ -180,7 +204,7 @@ def result(request):
 
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
-                           'count': request.session['count'], 'max_index': max_index, 'current_page':current_page})
+                           'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
         # 메인으로 돌아가기.
         else:
             try:
@@ -188,60 +212,9 @@ def result(request):
                 del request.session['count']
             except:
                 print('no data')
-            return render(request, 'frontpage/index.html')
-
-def more_result(request):
-    request.session.modified = True
-    # 결과 화면에서 POST방식 일 경우.
-    ## 결과 내 재검색 체크박스가 False인 경우.
-    if request.method == "POST":
-        user_input = request.POST['input_Symptom']
-        result = query(user_input)
-        count, posts, max_index, current_page = pagenation_post(request, result)
-
-        #print(posts.object_list[0]['_source']['diseaseko'])
-        #print(posts.object_list[0])
-
-        request.session['user_input'] = user_input
-        request.session['count'] = count
-        # 추가검색을 위해 만들어둔 세션 삭제해야 함.
-        try:
-            del request.session['old_input']
-            del request.session['re_search']
-        except:
-            print("not re_query")
-        return render(request, 'frontpage/result.html',
-                      {'user_input': user_input, 'posts': posts, 'count': count,
-                       'max_index': max_index, 'current_page': current_page})
-    else:
-        # 예외 처리는 Pagination이 POST방식을 활용하는 것이 아니고 GET 방식을 활용하기 때문에 나눠짐.
-        ## 결과 화면에서 사용자가 로고를 누를 때와 Pagination의 버튼을 누를 때를 나누기 위해 예외처리를 사용.
-        try:
-            re_search_check = request.session['re_search']
-            old_input=request.session['old_input']
-        except:
-            re_search_check=False
-            old_input = False
-
-        # 재검색 페이지에서 Pagination 이용할 때
-        if re_search_check:
-            user_input = request.session['user_input']
-            result = re_query(old_input,user_input)
-            count, posts, max_index,current_page = pagenation_post(request,result)
-
-            request.session['user_input'] = user_input
-            request.session['count'] = count
-
-            return render(request, 'frontpage/more_result.html',
-                          {'user_input': request.session['user_input'], 'posts': posts,
-                           'count': request.session['count'], 'max_index': max_index, 'current_page':current_page})
-        # 메인으로 돌아가기.
-        else:
             try:
                 del request.session['old_input']
                 del request.session['re_search']
-                del request.session['user_input']
-                del request.session['count']
             except:
-                print("no data")
+                print('no data')
             return render(request, 'frontpage/index.html')

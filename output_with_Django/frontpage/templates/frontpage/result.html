@@ -40,6 +40,7 @@
 <center>
     <a class="font-size-40" href="{% url 'index' %}" >Medical Search Engine</a>
 </center>
+
 <form method="POST"
       action="{% url 'result' %}"
       enctype="multipart/form-data">
@@ -52,7 +53,11 @@
     </div>
 
     <br><br><br>
+    {% if re_search_check %}
+    &nbsp;&nbsp;
+    {% else %}
     결과내 재검색 <input type="checkbox" name="re-search">
+    {% endif %}
 </form>
 
 <br><br><br><br>
