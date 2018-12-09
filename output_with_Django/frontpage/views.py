@@ -98,6 +98,7 @@ def pagenation_post(request,result):
 # Create your views here.
 def index(request):
     request.session.modified = True
+    # 메인화면에서 POST방식일 경우. 사용자 입력받아서 일반 query문으로 던져주면 된다.
     if request.method == "POST":
         test = request
         # Html에서 test.POST.input_Symptom(템플릿 언어일 때)
@@ -112,6 +113,7 @@ def index(request):
         return render(request, 'frontpage/result.html',
                       {'user_input': user_input, 'posts': posts, 'count': count,
                        'max_index': max_index,'current_page':current_page})
+    # 메인화면에서 GET방식일 경우. 이전 검색 내역을 지워주자.
     else:
         try:
             del request.session['user_input']
@@ -122,6 +124,8 @@ def index(request):
 
 def result(request):
     request.session.modified = True
+    # 결과 화면에서 POST방식 일 경우.
+    ## 결과 내 재검색 체크박스가 False인 경우.
     if request.method == "POST":
         test = request
         user_input = test.POST['input_Symptom']
@@ -140,12 +144,14 @@ def result(request):
         return render(request, 'frontpage/result.html',
                       {'user_input': user_input, 'posts': posts, 'count': count,
                        'max_index': max_index, 'current_page':current_page})
-
+    # 결과 화면에서 GET방식일 경우.
     else:
         try:
             check = {'user_input': request.session['user_input']}
         except:
             check = False
+        # 위의 예외 처리는 Pagination이 POST방식을 활용하는 것이 아니고 GET 방식을 활용하기 때문에 나눠짐.
+        ## 결과 화면에서 사용자가 로고를 누를 때와 Pagination의 버튼을 누를 때를 나누기 위해 위의 예외처리를 사용.
         if check:
             user_input = request.session['user_input']
             result = query(user_input)
@@ -157,5 +163,6 @@ def result(request):
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page})
+        # 메인으로 돌아가기.
         else:
             return render(request, 'frontpage/index.html')
