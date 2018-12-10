@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
     {#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
 
 
@@ -50,17 +51,25 @@
         <button type="submit" class="search-btn">
             <i class="fas fa-search" ></i>
         </button>
+
+
     </div>
 
     <br><br><br>
     {% if re_search_check %}
-    &nbsp;&nbsp;
+        &nbsp;&nbsp;
     {% else %}
-    결과내 재검색 <input type="checkbox" name="re-search">
+        {#        결과내 재검색 <input type="checkbox" name="re-search">#}
+        <center>
+        <br>
+            <span class="text-large"><b><font style="font-family: 'Nanum gothic'!important;"> 결과내 재검색</font></b></span>
+            <input type="checkbox" id="cb1">
+            <label for="cb1"></label>
+        </center>
     {% endif %}
 </form>
 
-<br><br><br><br>
+<br><br><br>
 <hr>
 
 <br>
@@ -89,20 +98,20 @@
         for(i=0;i<10; i++) {
             if(di[i].highlight){
                 if(di[i].highlight.diseaseko){
-                    document.write("<h3>" + di[i].highlight.diseaseko + "</h3>");
+                    document.write("<h3 class='title'>" + di[i].highlight.diseaseko + "</h3>");
                 }
                 else{
-                    document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
+                    document.write("<h3 class='title'>" + di[i]._source.diseaseko + "</h3>");
                 }
                 if(di[i].highlight.symptom){
-                    document.write("<p>" + di[i].highlight.symptom + "</p><br>");
+                    document.write("<p class='text'>" + di[i].highlight.symptom + "</p><br>");
                 }
                 else{
-                    document.write("<p>" + di[i]._source.symptom + "</p><br>");
+                    document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
                 }
             }else{
-                document.write("<h3>" + di[i]._source.diseaseko + "</h3>");
-                document.write("<p>" + di[i]._source.symptom + "</p><br>");
+                document.write("<h3 class='title'>" + di[i]._source.diseaseko + "</h3>");
+                document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
             }
         }
         document.write('<center><font size="4"><b>'+current_page+"</b></font></center></div>")
