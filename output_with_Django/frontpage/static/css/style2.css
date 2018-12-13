@@ -1,6 +1,5 @@
 
 body{
-    background: #64AAFF;
     font-family: "Nanum gothic";
 }
 /*.search-head{*/
@@ -138,5 +137,4 @@ input[id="cb1"] {
 }
 .text-large  {
     font-size: 130%;
-
 }

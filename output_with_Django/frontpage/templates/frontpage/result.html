@@ -8,14 +8,7 @@
 
     {#    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">#}
 
-
-    <style>
-
-        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-        @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
-
-    </style>
-    <link href='{% static "css/style2.css" %}' rel="stylesheet" >
+    <link href='{% static "css/sss2.css" %}' rel="stylesheet" >
     {#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />#}
     <title> Mathcoding Search </title>
 </head>
@@ -37,66 +30,66 @@
     } );
 </script>
 
-<body>
-<center>
-    <a class="font-size-40" href="{% url 'index' %}" >Medical Search Engine</a>
-</center>
+<div>
+<div id="back11">
+    <img src='{% static "img/background22.jpg" %}' height="100%" width="100%">
+</div>
+<div id="back22">
+    <a href="{% url 'index' %}" >
+        <img src='{% static "img/math_coding2.png" %}' height="100%" width="100%">
+    </a>
+</div>
+
+
 
 <form method="POST"
       action="{% url 'result' %}"
-      enctype="multipart/form-data">
-    <div class="search-box">
-        <input class="search-txt" type="text" name="input_Symptom" placeholder="증상을 입력해주세요">
+      enctype="mult ipart/form-data">
+    <div class="searchbox">
+        <input type="text" name="input_Symptom" placeholder=" Type to Symptom..">
         {% csrf_token %}
-        <button type="submit" class="search-btn">
-            <i class="fas fa-search" ></i>
+        <button type="submit" style="background-image:url('{% static "img/search2.png" %}')">
         </button>
-
-
     </div>
 
-    <br><br><br>
     {% if re_search_check %}
         &nbsp;&nbsp;
     {% else %}
         {#        결과내 재검색 <input type="checkbox" name="re-search">#}
-        <center>
-        <br>
-            <span class="text-large"><b><font style="font-family: 'Nanum gothic'!important;"> 결과내 재검색</font></b></span>
+        <div id="re-search">
             <input type="checkbox" id="cb1" name="re-search">
-            <label for="cb1"></label>
-        </center>
+            <label for="cb1"></label>&nbsp;&nbsp;
+            <b><font class="text-large"> 결과내 재검색</font></b>
+        </div>
+
+
     {% endif %}
 </form>
 
-<br><br><br>
-<hr>
-
-<br>
-{% if count %}
-    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 </font>
-{% else %}
-    <font size="4" style="margin-left: 11%"><b>'{{ user_input }}'</b> 에 대한 검색결과가 없습니다.</font>
-{% endif %}
-
+<div id="back">
+    {% if count %}
+        <font size="4" class="searchtext"><b>'{{ user_input }}'</b> 에 대한 검색결과가 <b>{{ count }}</b> 건이 검색되었습니다.</font>
+    {% else %}
+        <font size="4" class="searchtext"><b>'{{ user_input }}'</b> 에 대한 검색결과가 없습니다.</font>
+    {% endif %}
+</div>
 
 <script type="text/javascript">
 
     {#자바스크립트로 표현하기 #}
 
     var di = {{ posts.object_list | safe }};
-    {#var user_input = {{ user_input}};#}
     var count = {{ count|safe }};
     var i;
     var current_page={{ current_page }};
-
+    document.write('<div class="gg">')
 
     if(count!=0){
-        document.write('<font size="4">총 <b>' + count + "</b> 건이 검색되었습니다.</font><br><br>")
-        document.write('<div class="ground">')
 
         for(i=0;i<10; i++) {
+
             if(di[i].highlight){
+                document.write('<div class="box">')
                 if(di[i].highlight.diseaseko){
                     document.write("<h3 class='title'>" + di[i].highlight.diseaseko + "</h3>");
                 }
@@ -109,19 +102,27 @@
                 else{
                     document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
                 }
+                document.write('</div><br>')
             }else{
+                document.write('<div class="box">')
                 document.write("<h3 class='title'>" + di[i]._source.diseaseko + "</h3>");
                 document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
+                document.write('</div><br>')
             }
-        }
-        document.write('<center><font size="4"><b>'+current_page+"</b></font></center></div>")
-    }else{
-        // ~~로 검색되는 결과가 없습니다.
-        document.write('<br><br><div class="ground"><center><br><b><font style="nanum gothic" size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
-        document.write('<font size="4" style="nanum gothic" color="">검색어를 다시 입력해주세요.</font></center></div>')
-    }
 
+        }
+    }
+    else{
+        // ~~로 검색되는 결과가 없습니다.
+        document.write('<div class="box" style="width:100%">')
+        document.write('<div class="box"><center><br><b><font size="6"> 검색되는 결과가 없습니다. </font></b><br><br>')
+        document.write('<font size="4">검색어를 다시 입력해주세요.</font></center></div>')
+        document.write('</div>')
+    }
+    document.write('<center><font size="4"><b>'+current_page+"</b></font></center>")
+    {#document.write('</div>')#}
 </script>
+
 <div class="ground1">
     <nav>
         <ul class="pagination">
@@ -152,6 +153,9 @@
     </nav>
     <br>
 </div>
+</div>
+
+
 <a href="#" class="top"><i class="fas fa-arrow-alt-circle-up"></i></a>
 
 

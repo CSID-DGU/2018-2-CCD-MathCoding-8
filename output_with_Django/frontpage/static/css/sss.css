@@ -1,0 +1,69 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body{
+    margin: 0px;
+}
+#back1{
+    position: absolute;
+    z-index: -3;
+    margin: 0px;
+}
+#back2{
+    position: absolute;
+    top:40%;
+    width:50%;
+    left:25%;
+    z-index: -2;
+    margin: 0px;
+}
+
+input:-ms-input-placeholder{
+    color:#262626;
+}
+input::-webkit-input-placeholder{
+    color:#262626;
+}
+input::-moz-placeholder{
+    color:#262626;
+}
+
+div.searchbox{
+    position:absolute;
+    height:7%;
+    width: 48%;
+    border: 0px;
+    background: #ffffff;
+    top:51%;
+    left:26%;
+    box-shadow:2px 2px 2px 2px dimgray;
+}
+input{
+    font-size: 70px;
+    height: 100%;
+    width: 87%;
+    padding: 3%;
+    border: 0px;
+    outline : none;
+    float:left;
+    font-family: "Noto Sans KR", sans-serif !important;
+    letter-spacing: 3px;
+    font-weight: bold;
+
+}
+input:focus::-webkit-input-placeholder { color: transparent; }
+input:focus::-moz-placeholder { color: transparent; }
+input:focus:-ms-input-placeholder { color: transparent; }
+input:focus::-ms-input-placeholder { color: transparent; }
+
+button{
+    width: 13%;
+    height: 100%;
+    border: 0px;
+    background: #89c997;
+    outline: none;
+    float:right;
+    color:#ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
