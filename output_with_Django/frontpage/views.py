@@ -76,17 +76,19 @@ def result(request):
         print(checkbox_content)
         if checkbox_content:
             request.session['old_input']=request.session['user_input']
+            old_input = request.session['old_input']
             request.session['re_search']=checkbox_content
             user_input = request.POST['input_Symptom']
+
             result = re_query(request.session['old_input'],user_input)
             count, posts, max_index, current_page = pagenation_post(request, result)
             request.session['user_input'] = user_input
             request.session['count'] = count
             request.session['posts'] = posts.object_list
-            print("Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-            print(request.session['posts'])
+            #print("Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+            #print(request.session['posts'])
             return render(request, 'frontpage/result.html',
-                          {'user_input': user_input, 'posts': posts, 'count': count,
+                          {'user_input': user_input, 'posts': posts, 'count': count,'old_input':old_input,
                            'max_index': max_index, 'current_page': current_page,'re_search_check':checkbox_content})
         # 결과내 재검색을 체크하지 않은 경우
         else:
@@ -101,14 +103,7 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
-            print("++++++++++++++++++++++++++++++++++++++++++++++")
-            print(posts)
-            print(posts.object_list)
-            print(type(posts.object_list))
-            print(len(posts.object_list))
-            print("++++++++++++++++++++++++++++++++++++++++++++++")
-            request.session['posts'] = posts.object_list
-            print(posts.object_list[0]['_source']['diseaseko'])
+            #print(posts.object_list[0]['_source']['diseaseko'])
             # 추가검색을 위해 만들어둔 세션 삭제해야 함.
             try:
                 del request.session['old_input']
@@ -141,7 +136,7 @@ def result(request):
             request.session['count'] = count
 
             return render(request, 'frontpage/result.html',
-                          {'user_input': request.session['user_input'], 'posts': posts,
+                          {'user_input': request.session['user_input'], 'posts': posts, 'old_input':old_input,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
 
         # Pagination 이용할 때
@@ -155,7 +150,7 @@ def result(request):
             request.session['posts'] = posts.object_list
 
             return render(request, 'frontpage/result.html',
-                          {'user_input': request.session['user_input'], 'posts': posts,
+                          {'user_input': request.session['user_input'], 'posts': posts,'old_input':old_input,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
         # 메인으로 돌아가기.
         else:

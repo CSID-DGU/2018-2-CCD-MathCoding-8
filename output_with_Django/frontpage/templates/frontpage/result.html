@@ -68,7 +68,11 @@
 
 <div id="back">
     {% if count %}
+        {% if old_input %}
+        <font size="4" class="searchtext"><b>'{{old_input}}', '{{ user_input }}'</b> 에 대한 검색결과가 <b>{{ count }}</b> 건이 검색되었습니다.</font>
+        {% else %}
         <font size="4" class="searchtext"><b>'{{ user_input }}'</b> 에 대한 검색결과가 <b>{{ count }}</b> 건이 검색되었습니다.</font>
+        {% endif %}
     {% else %}
         <font size="4" class="searchtext"><b>'{{ user_input }}'</b> 에 대한 검색결과가 없습니다.</font>
     {% endif %}
