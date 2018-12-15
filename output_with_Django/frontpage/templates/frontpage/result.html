@@ -91,7 +91,6 @@
                 var url_mask = '{% url 'result_detail' query=1 %}'.replace(/1/, i);
                 document.write('<div class="box">')
                 if(di[i].highlight.diseaseko){
-
                     document.write("<h3 class='title'> <a href="+ url_mask +" name='disease_detail'>" + di[i].highlight.diseaseko + "</a></h3>");
                 }
                 else{
@@ -106,7 +105,7 @@
                 document.write('</div><br>')
             }else{
                 document.write('<div class="box">')
-                document.write("<h3 class='title'> <a href="+ url_mask +" name='disease_detail'>" + di[i]._source.diseaseko + "</a></h3>");
+                document.write("<h3 class='title'> <a href="+ url_mask +" class='title' name='disease_detail'>" + di[i]._source.diseaseko + "</a></h3>");
                 document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
                 document.write('</div><br>')
             }

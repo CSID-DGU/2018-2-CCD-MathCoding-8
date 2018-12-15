@@ -7,12 +7,50 @@
     <title>Math coding</title>
 </head>
 <body>
-<div class="gg">
-    <div class="box">
-        <p class="title">디자인입히기</p>
-        {{temp}}
-    </div>
-</div>
 
+<script type="text/javascript">
+    var temp = {{ temp | safe }};
+    document.write('<div class="gg">')
+    document.write('<div class="box">')
+
+    document.write('<h3 class="title">'+temp._source.diseaseko+'</h3>')
+
+    if(temp._source.diseaseen != ''){
+        document.write('<p class="text"><b>질환(영문명) : </b>'+temp._source.diseaseen+'</p>')
+    }
+    else{
+        document.write('<p class="text"><b>질환(영문명) : </b> 데이터가 존재하지 않습니다. </p>')
+    }
+
+    if(temp._source.part != ''){
+        document.write('<p class="text"><b>부위 : </b>'+temp._source.part+'</p>')
+    }
+    else{
+        document.write('<p class="text"><b>부위 : </b> 데이터가 존재하지 않습니다. </p>')
+    }
+
+    if(temp._source.symptom != ''){
+        document.write('<p class="text"><b>증상 : </b>'+temp._source.symptom+'</p>')
+    }
+    else{
+        document.write('<p class="text"><b>증상 : </b> 데이터가 존재하지 않습니다. </p>')
+    }
+
+    if(temp._source.treatment != ''){
+        document.write('<p class="text"><b>치료법 : </b>'+temp._source.treatment+'</p>')
+    }
+    else{
+        document.write('<p class="text"><b>치료법 : </b> 데이터가 존재하지 않습니다. </p>')
+    }
+
+    if(temp._source.department != ''){
+        document.write('<p class="text"><b>진료과 : </b>'+temp._source.department+'</p>')
+    }
+    else{
+        document.write('<p class="text"><b>진료과 : </b> 데이터가 존재하지 않습니다. </p>')
+    }
+
+    document.write('</div></div>')
+</script>
 </body>
 </html>
