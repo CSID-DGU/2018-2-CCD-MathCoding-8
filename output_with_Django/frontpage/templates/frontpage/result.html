@@ -35,7 +35,7 @@
     <img src='{% static "img/background22.jpg" %}' height="100%" width="100%">
 </div>
 <div id="back22">
-    <a href="{% url 'index' %}" >
+    <a href="{% url 'index' %}">
         <img src='{% static "img/math_coding2.png" %}' height="100%" width="100%">
     </a>
 </div>
@@ -87,14 +87,15 @@
     if(count!=0){
 
         for(i=0;i<10; i++) {
-
             if(di[i].highlight){
+                var url_mask = '{% url 'result_detail' query=1 %}'.replace(/1/, i);
                 document.write('<div class="box">')
                 if(di[i].highlight.diseaseko){
-                    document.write("<h3 class='title'>" + di[i].highlight.diseaseko + "</h3>");
+
+                    document.write("<h3 class='title'> <a href="+ url_mask +" name='disease_detail'>" + di[i].highlight.diseaseko + "</a></h3>");
                 }
                 else{
-                    document.write("<h3 class='title'>" + di[i]._source.diseaseko + "</h3>");
+                    document.write("<h3 class='title'> <a href="+ url_mask +" name='disease_detail'>" + di[i]._source.diseaseko + "</a></h3>");
                 }
                 if(di[i].highlight.symptom){
                     document.write("<p class='text'>" + di[i].highlight.symptom + "</p><br>");
@@ -105,11 +106,10 @@
                 document.write('</div><br>')
             }else{
                 document.write('<div class="box">')
-                document.write("<h3 class='title'>" + di[i]._source.diseaseko + "</h3>");
+                document.write("<h3 class='title'> <a href="+ url_mask +" name='disease_detail'>" + di[i]._source.diseaseko + "</a></h3>");
                 document.write("<p class='text'>" + di[i]._source.symptom + "</p><br>");
                 document.write('</div><br>')
             }
-
         }
     }
     else{

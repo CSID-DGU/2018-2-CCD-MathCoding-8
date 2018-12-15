@@ -31,6 +31,7 @@ def pagenation_post(request,result):
 # Create your views here.
 def index(request):
     request.session.modified = True
+
     re_search_check=False
     # 메인화면에서 POST방식일 경우. 사용자 입력받아서 일반 query문으로 던져주면 된다.
     if request.method == "POST":
@@ -43,6 +44,7 @@ def index(request):
 
         request.session['user_input'] = user_input
         request.session['count'] = count
+        request.session['posts'] = posts
 
         return render(request, 'frontpage/result.html',
                       {'user_input': user_input, 'posts': posts, 'count': count,
@@ -52,6 +54,7 @@ def index(request):
         try:
             del request.session['user_input']
             del request.session['count']
+            del request.session['posts']
         except:
             print('no data')
         return render(request, 'frontpage/index.html')
@@ -79,6 +82,9 @@ def result(request):
             count, posts, max_index, current_page = pagenation_post(request, result)
             request.session['user_input'] = user_input
             request.session['count'] = count
+            request.session['posts'] = posts.object_list
+            print("Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+            print(request.session['posts'])
             return render(request, 'frontpage/result.html',
                           {'user_input': user_input, 'posts': posts, 'count': count,
                            'max_index': max_index, 'current_page': current_page,'re_search_check':checkbox_content})
@@ -87,7 +93,6 @@ def result(request):
             user_input = request.POST['input_Symptom']
             result = query(user_input)
             count, posts, max_index,current_page = pagenation_post(request,result)
-
             # print(posts.object_list[0]['highlight']['symptom'])
             # print(posts.object_list[0]['highlight'])
             # print(re_query('두통 복통', '설사'))
@@ -96,10 +101,19 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
+            print("++++++++++++++++++++++++++++++++++++++++++++++")
+            print(posts)
+            print(posts.object_list)
+            print(type(posts.object_list))
+            print(len(posts.object_list))
+            print("++++++++++++++++++++++++++++++++++++++++++++++")
+            request.session['posts'] = posts.object_list
+            print(posts.object_list[0]['_source']['diseaseko'])
             # 추가검색을 위해 만들어둔 세션 삭제해야 함.
             try:
                 del request.session['old_input']
                 del request.session['re_search']
+                del request.session['posts']
             except:
                 print("not re_query")
             return render(request, 'frontpage/result.html',
@@ -138,7 +152,9 @@ def result(request):
 
             request.session['user_input'] = user_input
             request.session['count'] = count
+            request.session['posts'] = posts.object_list
 
+            print(posts.object_list[11]['_source']['diseaseko'])
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
@@ -156,4 +172,24 @@ def result(request):
                 print('no data')
             return render(request, 'frontpage/index.html')
 
-#def result_detail(request):
+
+def result_detail(request,query):
+    print("+++++++++++++++++")
+    print(query)
+    temp=request.session['posts']
+    print(temp[int(query)]['_source']['diseaseko'])
+    print("+++++++++++++++++")
+    request.session.modified = True
+    if request.method == "GET":
+        try:
+            del request.session['user_input']
+            del request.session['count']
+        except:
+            print('no data')
+        try:
+            del request.session['old_input']
+            del request.session['re_search']
+        except:
+            print('no data')
+
+        return render(request, 'frontpage/index.html')
