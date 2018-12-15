@@ -154,7 +154,6 @@ def result(request):
             request.session['count'] = count
             request.session['posts'] = posts.object_list
 
-            print(posts.object_list[11]['_source']['diseaseko'])
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
@@ -174,22 +173,7 @@ def result(request):
 
 
 def result_detail(request,query):
-    print("+++++++++++++++++")
-    print(query)
     temp=request.session['posts']
-    print(temp[int(query)]['_source']['diseaseko'])
-    print("+++++++++++++++++")
     request.session.modified = True
     if request.method == "GET":
-        try:
-            del request.session['user_input']
-            del request.session['count']
-        except:
-            print('no data')
-        try:
-            del request.session['old_input']
-            del request.session['re_search']
-        except:
-            print('no data')
-
-        return render(request, 'frontpage/index.html')
+        return render(request, 'frontpage/result_detail.html',{'temp':temp[int(query)]})
