@@ -115,6 +115,7 @@
             }
         }
     }
+
     else{
         // ~~로 검색되는 결과가 없습니다.
         document.write('<div class="box" style="width:100%">')
@@ -122,9 +123,12 @@
         document.write('<font size="4">검색어를 다시 입력해주세요.</font></center></div>')
         document.write('</div>')
     }
-    document.write('<center><font size="4"><b>'+current_page+"</b></font></center>")
-    {#document.write('</div>')#}
+
+    {# document.write('<center><font size="4"><b>'+current_page+"</b></font></center>") #}
+
 </script>
+
+<center><font size="4"><b> {{ current_page }} </b></font></center>
 
 <div class="ground1">
     <nav>

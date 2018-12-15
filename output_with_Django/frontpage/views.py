@@ -89,7 +89,7 @@ def result(request):
             #print(request.session['posts'])
             return render(request, 'frontpage/result.html',
                           {'user_input': user_input, 'posts': posts, 'count': count,'old_input':old_input,
-                           'max_index': max_index, 'current_page': current_page,'re_search_check':checkbox_content})
+                           'max_index': max_index, 'current_page':current_page,'re_search_check':checkbox_content})
         # 결과내 재검색을 체크하지 않은 경우
         else:
             user_input = request.POST['input_Symptom']
@@ -105,10 +105,12 @@ def result(request):
             request.session['count'] = count
             #print(posts.object_list[0]['_source']['diseaseko'])
             # 추가검색을 위해 만들어둔 세션 삭제해야 함.
+            print("-------------------------------------------")
+            print(current_page)
+            print("-------------------------------------------")
             try:
                 del request.session['old_input']
                 del request.session['re_search']
-                del request.session['posts']
             except:
                 print("not re_query")
             return render(request, 'frontpage/result.html',
@@ -148,7 +150,9 @@ def result(request):
             request.session['user_input'] = user_input
             request.session['count'] = count
             request.session['posts'] = posts.object_list
-
+            print("-------------------------------------------")
+            print(current_page)
+            print("-------------------------------------------")
             return render(request, 'frontpage/result.html',
                           {'user_input': request.session['user_input'], 'posts': posts,'old_input':old_input,
                            'count': request.session['count'], 'max_index': max_index, 'current_page':current_page,'re_search_check':re_search_check})
