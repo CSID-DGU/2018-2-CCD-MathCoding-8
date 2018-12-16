@@ -42,3 +42,50 @@ a.top {
     margin-right: 2%;
     line-height: 25px;
 }
+
+body:before{
+    content:'';
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+}
+button{
+    margin-left: 2%;
+    margin-right: 2%;
+    border: 2px solid #262626;
+    color:#262626;
+    border:none;
+    position:relative;
+    height:5%;
+    font-size:1.2em;
+    padding:0.5em 1.5em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    font-family: "Noto Sans KR", sans-serif !important;
+    font-weight: bold;
+}
+button:hover{
+    background:#fff;
+    color:#262626;
+}
+button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #262626;
+    transition:400ms ease all;
+}
+button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}

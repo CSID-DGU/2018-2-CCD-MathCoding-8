@@ -50,7 +50,8 @@
         document.write('<p class="text"><b>진료과 : </b> 데이터가 존재하지 않습니다. </p>')
     }
 
-    document.write('<a href="javascript:history.go(-1)">목록으로</a>')
+    {#document.write('<a href="javascript:history.go(-1)">목록으로</a>')#}
+    document.write('<button onclick="location.href=\'javascript:history.go(-1)\'">back to list</button>')
 
     document.write('</div></div>')
 
