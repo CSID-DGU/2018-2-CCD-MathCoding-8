@@ -82,6 +82,8 @@ def result(request):
             request.session['user_input'] = user_input
             request.session['count'] = count
             request.session['posts'] = posts.object_list
+            print(old_input)
+            print(user_input)
             return render(request, 'frontpage/result.html',
                           {'user_input': user_input, 'posts': posts, 'count': count,'old_input':old_input,
                            'max_index': max_index, 'current_page':current_page,'re_search_check':checkbox_content})
