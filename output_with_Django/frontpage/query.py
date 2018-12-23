@@ -9,7 +9,7 @@ def query(user_input):
                                   "query": {
                                       "multi_match": {
                                           "query": user_input,
-                                          "fields": ["diseaseko^3", "treatment", "symptom^2","synonym^0.5"],
+                                          "fields": ["diseaseko^3", "treatment", "symptom^2","synonym^0.25"],
                                           "type": "best_fields",
                                           "fuzziness": "auto",
                                           "minimum_should_match": 2
@@ -19,7 +19,7 @@ def query(user_input):
                                       "fragment_size": 2000,
                                       "number_of_fragments": 0,
                                       "fields": [
-                                          {"diseaseko": {}},
+                                          # {"diseaseko": {}},
                                           {"symptom": {}}
                                       ]
                                   }
@@ -55,7 +55,7 @@ def re_query(old,new):
                                               "must": {
                                                   "multi_match": {
                                                       "query": old,
-                                                      "fields": ["diseaseko^3", "treatment", "symptom^2","synonym^0.5"],
+                                                      "fields": ["diseaseko^3", "treatment", "symptom^2","synonym^0.25"],
                                                       "type": "best_fields",
                                                       "fuzziness": "auto",
                                                       "minimum_should_match": 2
@@ -77,7 +77,7 @@ def re_query(old,new):
                                           "fragment_size": 2000,
                                           "number_of_fragments": 0,
                                           "fields": [
-                                              {"diseaseko": {}},
+                                              # {"diseaseko": {}},
                                               {"symptom": {}}
                                           ]
                                       }
